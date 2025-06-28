@@ -1,0 +1,7 @@
+{
+  "cli_name": "test_pipeline",
+  "package_name": "test_pipeline",
+  "project_short_description": "A Snakemake pipeline with a Python CLI.",
+  "author_name": "Your Name",
+  "author_email": "your.email@example.com"
+}
