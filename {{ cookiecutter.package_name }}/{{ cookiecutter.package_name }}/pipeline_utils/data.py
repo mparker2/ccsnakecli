@@ -59,7 +59,7 @@ class MetadataTable:
     _mappings: dict
 
     @classmethod
-    def read_csv(cls, csv_fn, sep=',', index_col='sample_id', map_cols=None):
+    def read_csv(cls, csv_fn, sep=',', index_col='sample_id', map_cols=None, required_cols=None):
         """Read metadata from a delimited text file.
 
         Parameters
@@ -72,12 +72,17 @@ class MetadataTable:
             Column used to index rows and define direct row attributes.
         map_cols : list of str, optional
             Columns used to build bidirectional mappings.
+        required_cols: list of str, optional
+            Columns that are required in the csv file
         """
         map_cols = [] if map_cols is None else list(map_cols)
+        required_cols = set() if required_cols is None else set(required_cols)
 
         with open(csv_fn, newline='') as handle:
             reader = csv.DictReader(handle, delimiter=sep)
             columns = reader.fieldnames
+            if not required_cols.issubset(columns):
+                raise ValueError(f'Not all required_cols were found: {required_cols.difference(columns)}')
             if not columns:
                 raise ValueError(f'Metadata file {csv_fn!r} has no header row')
 
