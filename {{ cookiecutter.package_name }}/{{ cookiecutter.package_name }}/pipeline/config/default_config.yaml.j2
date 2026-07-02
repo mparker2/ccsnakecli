@@ -1,1 +1,42 @@
-outfile: "{{ '{{' }} outfile {{ '}}' }}"
+# Annotation files defined below are located relative to annotation_dir.
+annotation_dir: "{{ annotation_dir | default('annotations') }}"
+
+annotations:
+  fasta_fns: null
+  gtf_fns: null
+
+# Input files are searched for within this directory.
+raw_data_dir: "{{ raw_data_dir | default('raw_data') }}"
+
+# Results are created within this directory.
+results_dir: "{{ results_dir | default('results') }}"
+
+datasets:
+  {{ dataset_name }}: null
+
+target_file: null
+
+runtime:
+  # Optional scratch directory for temporary files. If null, rules use $TMPDIR
+  # where available, otherwise /tmp.
+  tmpdir: null
+
+  # the pipeline ships with env_yamls that will be installed by snakemake 
+  # if you prefer to supply your own yamls or use other pre-installed environments for certain steps,
+  # you can use this section to override them.
+  conda_envs:
+    touch: null
+
+  # Rule resources. Each entry supports:
+  #   threads: number of threads requested by the rule
+  #   mem_mb: fixed total memory in MB
+  #   mem_per_thread: memory in MB per thread
+  # If mem_per_thread is set, it overrides mem_mb.
+  resources:
+    default:
+      threads: 4
+      mem_mb: 8000
+
+    touch:
+      threads: 1
+      mem_mb: 1000

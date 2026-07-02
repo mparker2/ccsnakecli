@@ -1,5 +1,24 @@
-include: "rules/touch.smk"
+from {{ cookiecutter.package_name }}.pipeline_utils import (
+    config_namespace, 
+    bool_flag, auto_bool_flag, optional_flag,
+    format_params, format_command,
+    setup_tmpdir_getter, rule_resources_getter, conda_env_getter,
+    annotations_getter, raw_data_getter, results_getter
+)
+
+# config is injected from command line:
+cfg = config_namespace(config)
+annotations = annotations_getter(cfg)
+raw_data = raw_data_getter(cfg)
+results = results_getter(cfg)
+setup_tmpdir = setup_tmpdir_getter(cfg)
+get_conda_env = conda_env_getter(cfg)
+rule_resources = rule_resources_getter(cfg)
+
+
+include: "rules/touch.snakefile"
+
 
 rule all:
     input:
-        config["outfile"]
+        cfg.target_file

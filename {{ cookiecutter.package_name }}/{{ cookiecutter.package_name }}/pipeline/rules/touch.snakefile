@@ -1,5 +1,5 @@
 rule touch_output:
     output:
-        config["outfile"]
+        cfg.target_file
     shell:
         "touch {output}"

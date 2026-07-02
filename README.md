@@ -36,5 +36,5 @@ You’ll be prompted for:
 - `cli_name`: used for CLI command name
 - `package_name`: python package name
 - `project_short_description`
-- `full_name`
-- `email`
+- `author_name`
+- `author_email`
