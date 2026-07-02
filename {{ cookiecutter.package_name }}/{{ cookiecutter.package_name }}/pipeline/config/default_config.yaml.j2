@@ -1,18 +1,18 @@
 # Annotation files defined below are located relative to annotation_dir.
-annotation_dir: "{{ annotation_dir | default('annotations') }}"
+annotation_dir: "{{ "{{" }} annotation_dir | default('annotations') {{ "}}" }}"
 
 annotations:
   fasta_fns: null
   gtf_fns: null
 
 # Input files are searched for within this directory.
-raw_data_dir: "{{ raw_data_dir | default('raw_data') }}"
+raw_data_dir: "{{ "{{" }} raw_data_dir | default('raw_data') {{ "}}" }}"
 
 # Results are created within this directory.
-results_dir: "{{ results_dir | default('results') }}"
+results_dir: "{{ "{{" }} results_dir | default('results') {{ "}}" }}"
 
 datasets:
-  {{ dataset_name }}: null
+  {{ "{{" }} dataset_name {{ "}}" }}: null
 
 target_file: null
 

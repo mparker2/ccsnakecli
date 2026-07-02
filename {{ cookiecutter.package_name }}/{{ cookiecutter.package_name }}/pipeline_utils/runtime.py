@@ -24,7 +24,7 @@ def setup_tmpdir_getter(config):
     def _wrapped(prefix="{rule}"):
         base = '${TMPDIR:-/tmp}' if tmpdir is None else tmpdir
         return f"""
-        tmpdir=$(mktemp -d "{base}/{prefix}.{{jobid}}.XXXXXX");
+        tmpdir=$(mktemp -d "{base}/{prefix}.{{ "{{" }}jobid{{ "}}" }}.XXXXXX");
         trap 'rm -rf -- "$tmpdir"' EXIT;
         """
     return _wrapped
